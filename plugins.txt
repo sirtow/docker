@@ -1,0 +1,3 @@
+pipeline-maven
+pipeline-npm
+nodejs
