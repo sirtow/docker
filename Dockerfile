@@ -39,10 +39,13 @@ COPY init.groovy /usr/share/jenkins/ref/init.groovy.d/tcp-slave-agent-port.groov
 
 # jenkins version being bundled in this docker image
 ARG JENKINS_VERSION
-ENV JENKINS_VERSION ${JENKINS_VERSION:-2.60.3}
+ENV JENKINS_VERSION ${JENKINS_VERSION:-2.82}
 
 # jenkins.war checksum, download will be validated using it
-ARG JENKINS_SHA=2d71b8f87c8417f9303a73d52901a59678ee6c0eefcf7325efed6035ff39372a
+#ARG JENKINS_SHA=2d71b8f87c8417f9303a73d52901a59678ee6c0eefcf7325efed6035ff39372a
+ARG JENKINS_SHA=d6babda3a28e108eaa2a897a5484c35a10ade4e837b69e1510d71c0ecda94c0e
+
+
 
 # Can be used to customize where jenkins.war get downloaded from
 ARG JENKINS_URL=https://repo.jenkins-ci.org/public/org/jenkins-ci/main/jenkins-war/${JENKINS_VERSION}/jenkins-war-${JENKINS_VERSION}.war
@@ -68,9 +71,7 @@ RUN curl -sL "https://deb.nodesource.com/setup_8.x" > tmp.sh
 RUN bash tmp.sh
 
 RUN apt-get update && apt-get install -y nodejs
-RUN node -v
-
-
+ENV npm_config_cache "/tmp/.npm"
 USER ${user}
 
 COPY jenkins-support /usr/local/bin/jenkins-support
@@ -82,4 +83,3 @@ COPY plugins.sh /usr/local/bin/plugins.sh
 COPY install-plugins.sh /usr/local/bin/install-plugins.sh
 COPY plugins.txt /usr/share/jenkins/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/plugins.txt
-WORKDIR  "$JENKINS_HOME"
