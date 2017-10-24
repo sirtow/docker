@@ -1,3 +1,8 @@
 pipeline-maven
 pipeline-npm
 nodejs
+nexus-artifact-uploader
+pipeline-utility-steps
+job-dsl
+cloudbees-bitbucket-branch-source
+openshift-pipeline
