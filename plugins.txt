@@ -6,3 +6,4 @@ pipeline-utility-steps
 job-dsl
 cloudbees-bitbucket-branch-source
 openshift-pipeline
+openshift-client

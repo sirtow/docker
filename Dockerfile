@@ -3,6 +3,17 @@ FROM openjdk:8-jdk
 
 RUN apt-get update && apt-get install -y git curl nodejs && rm -rf /var/lib/apt/lists/*
 
+
+
+ENV OC_VER v3.6.1-008f2d5
+
+RUN cd /tmp \
+  && curl -L https://github.com/openshift/origin/releases/download/v3.6.1/openshift-origin-client-tools-${OC_VER}-linux-64bit.tar.gz > oc.tgz \
+  && tar -xvzf oc.tgz \
+  && mv openshift-origin-client-tools-${OC_VER}-linux-64bit/oc /usr/local/bin/ \
+  && chmod 777 /usr/local/bin/oc
+
+
 ARG user=jenkins
 ARG group=jenkins
 ARG uid=1000
