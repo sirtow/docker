@@ -12,7 +12,8 @@ RUN cd /tmp \
   && tar -xvzf oc.tgz \
   && mv openshift-origin-client-tools-${OC_VER}-linux-64bit/oc /usr/local/bin/ \
   && chmod 777 /usr/local/bin/oc
-
+RUN mkdir /.kube
+RUN chmod 777 /.kube
 
 ARG user=jenkins
 ARG group=jenkins
